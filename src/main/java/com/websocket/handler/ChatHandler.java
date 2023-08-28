@@ -12,6 +12,8 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.log4j.Log4j2;
@@ -62,6 +64,22 @@ public class ChatHandler extends TextWebSocketHandler {
 		
 		log.info("final dataMap >>>>>>>  " + dataMap);
 		
+		//send a message
+		System.out.println("receiver session >>" + userSession.get(receiverId));
+		String msg = json.writeValueAsString(dataMap);
 		
+		
+		if(userSession.get(receiverId) != null) {
+			userSession.get(receiverId).sendMessage(new TextMessage(msg));
+		}
+		//send a message myself
+		if(!senderId.equals(receiverId)) {
+			dataMap.put("receiverId", senderId);
+			msg=json.writeValueAsString(dataMap);
+			session.sendMessage(new TextMessage(msg));
+		}
 	}	
+	
+	
+	
 }
