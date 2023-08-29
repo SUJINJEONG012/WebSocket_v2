@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.websocket.entity.Contact;
 
-@Repository
+
 public interface ContactRepository  extends JpaRepository<Contact, Long>{
 	
 	Contact findTop1ByEmailOrderByWdateDesc(String email);

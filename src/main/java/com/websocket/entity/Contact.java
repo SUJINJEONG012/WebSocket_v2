@@ -22,7 +22,7 @@ public class Contact {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idx;
+	private Long id;
 	
 	private String name;
 	private String email;
@@ -31,8 +31,7 @@ public class Contact {
 	private String phone;
 	
 	private String message;
-	
-	
+
 	private LocalDateTime wdate;
 	
 	
